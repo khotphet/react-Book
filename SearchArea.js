@@ -7,6 +7,12 @@ const SearchArea = (props) =>{
     <form onSubmit={props.searchBook} action="">
     <input onChange={props.handleSearch} type="text" />
     <button type="submit">search</button>
+      <select defaultValue="Sort" onChange={props.handleSort}>
+        <option disabled value="Sort">Sort</option>
+        <option value="Newest">Newest</option>
+        <option value="Oldest">Oldest</option>
+
+      </select>
     </form>
 
     </div>
