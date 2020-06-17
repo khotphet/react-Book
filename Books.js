@@ -36,16 +36,17 @@ class Books extends Component {
       this.setState({ searchField: e.target.value})
     }
 
-    cleanData = (e) =>{
+    cleanData = (data) =>{
       const cleanedData = data.body.items.map((book) =>{
         if (book.volumeInfo.hasOwnProperty('publishedDate')=== false){
           book.volumeInfo['publishedDate'] = '0000';
         }
         else if (book.volumeInfo.hasOwnProperty('imageLinks')=== false){
-          book.volumeInfo['imageLinks'] = {thumbnail: ''};
+          book.volumeInfo['imageLinks'] = {thumbnail: 'https://cdn.samsung.com/etc/designs/smg/global/imgs/support/cont/NO_IMG_600x600.png'};
         }
+        return book;
       })
-      return book;
+      return cleanedData;
     }
   render() {
     const sortedBooks = this.state.books.sort((a,b)=>{
@@ -54,7 +55,7 @@ class Books extends Component {
         - parseInt(a.volumeInfo.publishedDate.substring(0,4))
       }
       else if(this.state.sort === 'Oldest'){
-        return parseInt(b.volumeInfo.publishedDate.substring(0,4))
+        return parseInt(a.volumeInfo.publishedDate.substring(0,4))
         - parseInt(b.volumeInfo.publishedDate.substring(0,4))
       }
     })
